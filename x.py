@@ -1,134 +1,90 @@
 import tkinter as tk
 
-# ---------------- WINDOW ----------------
-app = tk.Tk()
-app.title("Tkinter Space Management Demo")
-app.geometry("700x450")
-app.config(bg="#dddddd")
+root = tk.Tk()
+root.title("Checkbutton – All Options Demo")
+root.geometry("520x420")
+root.config(bg="lightgray")
 
+# control variables
+cb1_var = tk.IntVar(value=1)
+cb2_var = tk.StringVar(value="OFF")
+cb3_var = tk.StringVar(value="MAYBE")
 
-# ---------------- HEADER (fill X) ----------------
-header = tk.Label(
-    app,
-    text="Spacing in Tkinter",
-    font=("Arial", 26, "bold"),
-    bg="#2c7be5",
-    fg="white",
-    pady=15,           # INNER padding
-)
-header.pack(fill="x")  # Fills horizontal space
+def checked():
+    print("Checkbutton values:")
+    print("CB1:", cb1_var.get())
+    print("CB2:", cb2_var.get())
+    print("CB3:", cb3_var.get())
+    print("-" * 30)
 
+cb1 = tk.Radiobutton(
+    root,
 
-# ---------------- MAIN FRAME ----------------
-main_frame = tk.Frame(
-    app,
-    bg="#f5f5f5",
-    padx=20,           # INNER padding of frame
-    pady=20
-)
-main_frame.pack(
-    fill="both",
-    expand=True,
-    padx=20,           # OUTER padding (margin)
-    pady=20
-)
+    # --- TEXT / DISPLAY ---
+    text="Enable Feature A",
+    font=("Arial", 12, "bold"),      # font style
+    fg="blue",                       # text color
+    bg="lightgray",                  # background color
+    activeforeground="red",          # text color on hover
+    activebackground="yellow",       # background on hover
+    disabledforeground="gray",       # text color when disabled
+    justify="left",                  # text alignment
+    wraplength=200,                  # wrap text after width
+    underline=0,                     # underline character index
 
+    # --- VARIABLE / VALUE ---
+    variable=cb1_var,                # control variable
+    # onvalue=1,                       # value when checked
+    # offvalue=0,                      # value when unchecked
 
-# ---------------- LEFT PANEL ----------------
-left_frame = tk.Frame(
-    main_frame,
-    bg="#ffffff",
-    bd=2,
-    relief="groove",
-    padx=15,
-    pady=15
-)
-left_frame.pack(
-    side="left",
-    fill="both",
-    expand=True,
-    padx=10,
-    pady=10
-)
+    # --- INDICATOR / STYLE ---
+    indicatoron=True,                # True = checkbox, False = button style
+    selectcolor="green",             # color when checked
+    width=25,                        # widget width
+    height=2,                        # widget height
+    padx=10,                         # internal x padding
+    pady=5,                          # internal y padding
+    relief="groove",                 # border style
+    borderwidth=3,                   # border thickness
 
-tk.Label(
-    left_frame,
-    text="Left Panel",
-    font=("Arial", 18, "bold"),
-    anchor="w"          # Text aligned inside widget
-).pack(fill="x", pady=(0, 10))
+    # --- HIGHLIGHT ---
+    highlightthickness=2,            # focus border thickness
+    highlightbackground="black",     # focus border (inactive)
+    highlightcolor="red",             # focus border (active)
 
-tk.Button(
-    left_frame,
-    text="Button 1",
-    padx=20,            # INNER padding
-    pady=10
-).pack(pady=5)
+    # --- STATE / INTERACTION ---
+    state="normal",                  # normal / disabled
+    command=checked,                 # function on toggle
+    cursor="hand2",                  # mouse cursor
+    takefocus=True,                  # allow keyboard focus
 
-tk.Button(
-    left_frame,
-    text="Button 2",
-    width=15,           # TEXT units
-    height=2
-).pack(pady=5)
-
-
-# ---------------- RIGHT PANEL ----------------
-right_frame = tk.Frame(
-    main_frame,
-    bg="#ffffff",
-    bd=2,
-    relief="groove",
-    padx=15,
-    pady=15
-)
-right_frame.pack(
-    side="right",
-    fill="both",
-    expand=True,
-    padx=10,
-    pady=10
+    # --- LAYOUT ---
+    anchor="w"                       # alignment inside widget
 )
 
-tk.Label(
-    right_frame,
-    text="Right Panel",
-    font=("Arial", 18, "bold"),
-    anchor="w"
-).pack(fill="x", pady=(0, 10))
-
-entry = tk.Entry(
-    right_frame,
-    font=("Arial", 16),
-    bd=4,
-    relief="sunken",
-    highlightthickness=2,
-    highlightcolor="blue",
-    highlightbackground="gray"
+cb2 = tk.Checkbutton(
+    root,
+    text="Dark Mode",
+    bg="lightgray",
+    variable=cb2_var,
+    onvalue="ON",
+    offvalue="OFF",
+    command=checked
 )
-entry.pack(fill="x", padx=10, pady=10)
-entry.insert(0, "Text inside Entry")  # Pre-filled text
 
-
-tk.Button(
-    right_frame,
-    text="Submit",
-    padx=25,
-    pady=10,
-    bg="#28a745",
-    fg="white"
-).pack(pady=20)
-
-
-# ---------------- FOOTER ----------------
-footer = tk.Label(
-    app,
-    text="Footer uses pady + fill",
-    bg="#333333",
-    fg="white",
-    pady=10
+cb3 = tk.Checkbutton(
+    root,
+    text="Experimental Option (Tri-state)",
+    bg="lightgray",
+    variable=cb3_var,
+    onvalue="YES",
+    offvalue="NO",
+    tristatevalue="MAYBE",            # third state
+    command=checked
 )
-footer.pack(fill="x")
 
+cb1.pack(pady=10, anchor="w")
+cb2.pack(pady=10, anchor="w")
+cb3.pack(pady=10, anchor="w")
 
-app.mainloop()
+root.mainloop()
