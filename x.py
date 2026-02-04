@@ -1,13 +1,24 @@
 import tkinter as tk
 
 root = tk.Tk()
-root.title("All Variables Example")
-root.geometry("350x300")
+root.title("StringVar with Checkbutton")
+root.geometry("350x200")
 
+notifications = tk.StringVar(value="OFF")
 
-tk.Radiobutton(root, text="Male",  value=1).pack()
-tk.Radiobutton(root, text="Female",  value=2).pack()
-tk.Radiobutton(root, text="Other",  value=3).pack()
+def show_status():
+    lbl.config(text="Notifications: " + notifications.get())
 
+tk.Checkbutton(
+    root,
+    text="Enable Notifications",
+    variable=notifications,
+    onvalue="ON ✅",
+    offvalue="OFF ❌",
+    command=show_status
+).pack(pady=20)
+
+lbl = tk.Label(root, text="Notifications: OFF ❌", fg="blue")
+lbl.pack()
 
 root.mainloop()
