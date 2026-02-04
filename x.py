@@ -1,24 +1,26 @@
 import tkinter as tk
 
 root = tk.Tk()
-root.title("StringVar with Checkbutton")
-root.geometry("350x200")
+root.title("App Settings")
 
-notifications = tk.StringVar(value="OFF")
+dark_mode = tk.IntVar()
+auto_save = tk.IntVar()
+notifications = tk.IntVar()
+location_access = tk.IntVar()
 
-def show_status():
-    lbl.config(text="Notifications: " + notifications.get())
+def apply_settings():
+    print("Dark Mode:", dark_mode.get())
+    print("Auto Save:", auto_save.get())
+    print("Notifications:", notifications.get())
+    print("Location Access:", location_access.get())
 
-tk.Checkbutton(
-    root,
-    text="Enable Notifications",
-    variable=notifications,
-    onvalue="ON ✅",
-    offvalue="OFF ❌",
-    command=show_status
-).pack(pady=20)
+tk.Label(root, text="Enable settings:").pack(pady=5)
 
-lbl = tk.Label(root, text="Notifications: OFF ❌", fg="blue")
-lbl.pack()
+tk.Checkbutton(root, text="Dark Mode", variable=dark_mode).pack(anchor="w")
+tk.Checkbutton(root, text="Auto Save", variable=auto_save).pack(anchor="w")
+tk.Checkbutton(root, text="Notifications", variable=notifications).pack(anchor="w")
+tk.Checkbutton(root, text="Location Access", variable=location_access).pack(anchor="w")
+
+tk.Button(root, text="Apply", command=apply_settings).pack(pady=10)
 
 root.mainloop()
