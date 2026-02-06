@@ -1,26 +1,46 @@
 import tkinter as tk
+from tkinter import messagebox
 
-root = tk.Tk()
-root.title("App Settings")
+app = tk.Tk()
+app.geometry("500x400")
+app.title("MessageBox Demo")
 
-dark_mode = tk.IntVar()
-auto_save = tk.IntVar()
-notifications = tk.IntVar()
-location_access = tk.IntVar()
+def info_msg():
+    messagebox.showinfo("Information", "This is an info message!")
 
-def apply_settings():
-    print("Dark Mode:", dark_mode.get())
-    print("Auto Save:", auto_save.get())
-    print("Notifications:", notifications.get())
-    print("Location Access:", location_access.get())
+def warning_msg():
+    messagebox.showwarning("Warning", "This is a warning message!")
 
-tk.Label(root, text="Enable settings:").pack(pady=5)
+def error_msg():
+    messagebox.showerror("Error", "This is an error message!")
 
-tk.Checkbutton(root, text="Dark Mode", variable=dark_mode).pack(anchor="w")
-tk.Checkbutton(root, text="Auto Save", variable=auto_save).pack(anchor="w")
-tk.Checkbutton(root, text="Notifications", variable=notifications).pack(anchor="w")
-tk.Checkbutton(root, text="Location Access", variable=location_access).pack(anchor="w")
+def ask_yes_no():
+    ans = messagebox.askyesno("Confirm", "Do you want to continue?")
+    print(ans, "eeeeeeeeeee")
+    if ans:
+        messagebox.showinfo("Result", "You clicked YES")
+    else:
+        messagebox.showinfo("Result", "You clicked NO")
 
-tk.Button(root, text="Apply", command=apply_settings).pack(pady=10)
+def ask_ok_cancel():
+    ans = messagebox.askokcancel("Confirm", "Are you sure?")
+    print("OK Cancel Answer:", ans)
 
-root.mainloop()
+def ask_retry_cancel():
+    ans = messagebox.askretrycancel("Failed", "Retry again?")
+    print("Retry Cancel Answer:", ans)
+
+def ask_yes_no_cancel():
+    ans = messagebox.askyesnocancel("Save File", "Do you want to save file?")
+    print("Yes No Cancel Answer:", ans)
+
+tk.Button(app, text="Show Info", command=info_msg).pack(pady=10)
+tk.Button(app, text="Show Warning", command=warning_msg).pack(pady=10)
+tk.Button(app, text="Show Error", command=error_msg).pack(pady=10)
+
+tk.Button(app, text="Ask Yes/No", command=ask_yes_no).pack(pady=10)
+tk.Button(app, text="Ask OK/Cancel", command=ask_ok_cancel).pack(pady=10)
+tk.Button(app, text="Ask Retry/Cancel", command=ask_retry_cancel).pack(pady=10)
+tk.Button(app, text="Ask Yes/No/Cancel", command=ask_yes_no_cancel).pack(pady=10)
+
+app.mainloop()
