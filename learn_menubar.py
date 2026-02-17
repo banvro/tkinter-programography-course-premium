@@ -59,3 +59,7 @@ app.bind("<Control-q>", quit_app)
 app.bind("<Control-o>", opening_file)
 
 app.mainloop()
+
+
+
+# code : https://miro.com/app/board/uXjVG_K0I1w=/?share_link_id=514603268982
